@@ -1,0 +1,26 @@
+version: '3.3'
+services:
+  backend:
+    build:
+      context: ./vending-machine-backend
+    container_name: vending-backend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./vending-machine-backend:/app
+    
+  frontend:
+    build:
+      context: ./vending-machine-frontend
+    container_name: vending-frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./vending-machine-frontend:/app
+    depends_on:
+      - backend
+    

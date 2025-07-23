@@ -1,0 +1,34 @@
+{
+  "dependencies": {
+    "@prisma/client": "^6.12.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "zod": "^4.0.5"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.1.0",
+    "@types/swagger-ui-express": "^4.1.8",
+    "jest": "^30.0.5",
+    "prisma": "^6.12.0",
+    "ts-jest": "^29.4.0",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.3"
+  },
+  "scripts": {
+    "dev": "ts-node-dev --respawn src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "seed": "ts-node prisma/seed.ts",
+    "test": "jest",
+    "migrate": "npx prisma migrate dev --name init",
+    "reset": "npx prisma migrate reset --force",
+    "studio": "npx prisma studio",
+    "generate": "npx prisma generate"
+  }
+}

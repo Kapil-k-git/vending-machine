@@ -1,0 +1,20 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Chocolate {
+  id       Int    @id @default(autoincrement())
+  name     String @unique
+  price    Int
+  quantity Int
+}
+
+model UserCash {
+  id    Int @id @default(1)
+  cash  Int
+}

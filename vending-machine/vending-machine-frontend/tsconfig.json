@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "types": ["jest", "@testing-library/jest-dom","node"],
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+
+    "baseUrl": ".",                   
+    "paths": {
+      "@/*": ["src/*"] 
+    }
+  },
+  "include": ["src", "setupTests.ts", "src/hooks"]
+}

@@ -8,12 +8,20 @@ A full stack vending machine application with a React + TypeScript frontend and 
 
 - **Frontend:** React, TypeScript, Vite, Material UI, Jest, React Testing Library
 - **Backend:** Node.js, Express, TypeScript, Prisma, SQLite, Zod, Jest, Swagger
+- **Deployment:** Frontend on Vercel, Backend on railway
+
+---
+
+## Live URLs
+
+- **Frontend (Vercel):** [https://vending-machine-navy.vercel.app/](https://vending-machine-navy.vercel.app/)
+- **Backend (Railway):** https://hearty-stillness-production.up.railway.app/
 
 ---
 
 ## How to Run the App
 
-### Backend
+### Backend (Local or Docker)
 
 1. **Navigate to backend directory:**
    ```bash
@@ -25,8 +33,8 @@ A full stack vending machine application with a React + TypeScript frontend and 
    ```
 3. **Set up the database:**
    ```bash
-   npx prisma migrate deploy
-   npx prisma db seed
+   npm run migrate 
+   npm run seed
    ```
 4. **Start the backend server:**
    ```bash
@@ -34,7 +42,22 @@ A full stack vending machine application with a React + TypeScript frontend and 
    ```
    The backend runs on `http://localhost:3000`.
 
-### Frontend
+#### Run Backend with Docker
+
+1. From the `vending-machine` directory:
+   ```bash
+   sudo docker-compose up --build
+   ```
+   - This will build and run both backend and frontend containers.
+   - Backend: http://localhost:3000
+   - Frontend: http://localhost:5173
+
+2. To stop and remove containers:
+   ```bash
+   sudo docker-compose down
+   ```
+
+### Frontend (Local)
 
 1. **Navigate to frontend directory:**
    ```bash
@@ -49,6 +72,27 @@ A full stack vending machine application with a React + TypeScript frontend and 
    npm run dev
    ```
    The frontend runs on `http://localhost:5173` by default.
+
+---
+
+## Frontend Docker Usage
+
+A `Dockerfile` is provided in `vending-machine/vending-machine-frontend` for containerizing the frontend app.
+
+### Build the Docker image:
+```bash
+cd vending-machine/vending-machine-frontend
+sudo docker build -t vending-frontend .
+```
+
+### Run the container:
+```bash
+sudo docker run -d -p 5173:5173 --name vending-frontend-container vending-frontend
+```
+
+- The app will be available at [http://localhost:5173](http://localhost:5173)
+- The Dockerfile uses Vite's preview server for production: `CMD ["npm", "run", "preview", "--", "--host"]`
+- For local development, use `npm run dev` instead.
 
 ---
 
@@ -84,9 +128,13 @@ vending-machine/vending-machine-frontend/
 
 ## Testing
 
-- **Backend:** Run `npm test` in `vending-machine/vending-machine-backend`
-- **Frontend:** Run `npm test` in `vending-machine/vending-machine-frontend`
+- **Backend:** Run `npm run test` in `vending-machine/vending-machine-backend`
+- **Frontend:** Run `npm run test` in `vending-machine/vending-machine-frontend`
 
 ---
 
-For further details, see the source code and comments within each module.
+## Notes on Docker
+
+- The provided `docker-compose.yml` builds and runs both backend and frontend containers.
+- Make sure ports 3000 (backend) and 5173 (frontend) are free before running Docker Compose.
+- For SQLite, the database is not persistent across container rebuilds unless you mount a volume.
